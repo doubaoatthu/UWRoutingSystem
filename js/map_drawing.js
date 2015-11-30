@@ -51,7 +51,10 @@ $(document).ready(function() {
   $("#exit_btn").on("click", exitbuilding);
   $("#enter_btn").on("click", enterbuilding);
   $("#submit_btn").on("click", submittoServer);
-
+  $("#goup").on("click", upstairs);
+  $("#godown").on("click", downstairs);
+  $("#goexit").on("click", exitbuilding);
+  $("#goenter").on("click", enterbuilding);
 
 });
 
@@ -214,11 +217,18 @@ function clickMap(event) {
     var myindex = (curBuilding.valueOf() == "mc".valueOf())? -1:3;
     myindex += curFloor;
     canGoup(pt.x, pt.y, myindex)
+    canExit(pt.x, pt.y, myindex)
     if(nearlift){
       console.log("click map can go up");
       $("#stairs-dialog").dialog({position: {of:event}});
       $("#stairs-dialog").dialog("option", "position", {of: event});
     }
+    if(nearexit){
+      console.log("click map can go up");
+      $("#exit-dialog").dialog({position: {of:event}});
+      $("#exit-dialog").dialog("option", "position", {of: event});
+    }
+
   
   newpoint(event);
 }

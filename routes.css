@@ -1,0 +1,223 @@
+.col-md-4{
+	position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+	}
+#ineedbreakfast_background{
+	background-color:#D8D8D8;
+	margin:4px;
+	padding:5px;
+	
+	}
+#ineedbreakfast{
+	width:100%;
+	background-color:#D8D8D8;}
+
+#clue_area{
+	text-align: center;
+	margin-top:5px;
+	margin-left:5px;
+	margin-right:5px;
+	margin-bottom:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:5px;
+	padding-right:5px;
+	width: 100%;
+	height: relative;
+	background-color:#D8D8D8;
+}	
+
+#clue{
+	text-align: center;
+	font-family: Helvetica, Arial;
+	font-size: 20px;
+}
+
+#search_area{
+	text-align: center;
+	margin-top:10px;
+	margin-left:5px;
+	margin-right:13px;
+	margin-bottom:10px;/*
+	-webkit-border-radius: 11px;
+  	-moz-border-radius: 11;
+ 	border-radius: 5px;
+  	border: solid #FFF 2px;*/
+	padding-top:7px;
+	padding-bottom:5px;
+	padding-left:6px;
+	padding-right:10px;
+	
+ 
+}
+#label_pan{
+	text-align: center;
+	margin-top:10px;
+	margin-left:5px;
+	margin-right:13px;
+	margin-bottom:10px;/*
+	-webkit-border-radius: 11px;
+  	-moz-border-radius: 11;
+ 	border-radius: 5px;
+  	border: solid #FFF 2px;*/
+	height: 100%;
+}
+#building_map{
+	text-align: center;
+	margin-top:3px;
+	margin-left:3px;
+	margin-right:3px;
+	margin-bottom:3px;
+	display:inline-block;
+	-webkit-border-radius: 11px;
+  	-moz-border-radius: 11;
+ 	border-radius: 5px;
+  	border: solid #FFF 2px;
+	height: 100%;
+	width: 85%;
+	background-color: #b4d8f0; 
+}
+#map{
+	margin-top:7px;
+	margin-left:3px;
+	margin-right:3px;
+	margin-bottom:3px;
+	height: 95%;
+	width: 90%;
+}
+.btn-select { 
+position: relative; 
+display: inline-block; 
+width: 110px; 
+height: 25px; 
+background-color: #b4d8f0; 
+font: 14px/20px "Microsoft YaHei"; 
+color: #fff; 
+} 
+.btn-select .cur-select { 
+position: absolute; 
+display: block; 
+width: 150px; 
+height: 25px; 
+line-height: 25px; 
+background: #f80 url(ico-arrow.png) no-repeat 125px center; 
+text-indent: 10px; 
+} 
+.btn-select:hover .cur-select { 
+background-color: #f90; 
+} 
+.btn-select select { 
+position: absolute; 
+top: 0; 
+left: 0; 
+width: 150px; 
+height: 25px; 
+opacity: 0; 
+filter: alpha(opacity: 0;); 
+font: 14px/20px "Microsoft YaHei"; 
+color: #f80; 
+} 
+.btn-select select option { 
+text-indent: 10px; 
+} 
+.btn-select select option:hover { 
+background-color: #f80; 
+color: #fff; 
+} 
+
+.change_map_btn{
+	display: block;
+	margin-top:3px;
+	margin-left:3px;
+	margin-right:3px;
+	margin-bottom:3px;
+	display:inline;
+	width: 100%;
+	height: 49%;
+	background-color: #b4d8f0; 
+	font: 14px/20px "Microsoft YaHei"; 
+	color: #fff; 
+}
+.change_map_btn:hover {
+  background: #c1e1f5;
+  background-image: -webkit-linear-gradient(top, #c1e1f5, #82afcc);
+  background-image: -moz-linear-gradient(top, #c1e1f5, #82afcc);
+  background-image: -ms-linear-gradient(top, #c1e1f5, #82afcc);
+  background-image: -o-linear-gradient(top, #c1e1f5, #82afcc);
+  background-image: linear-gradient(to bottom, #c1e1f5, #82afcc);
+  text-decoration: none;
+}
+#upstairs_btn,#downstairs_btn{
+	display: block;
+	margin-top:3px;
+	margin-left:3px;
+	margin-right:3px;
+	margin-bottom:3px;
+	display:inline;
+	width: 100%;
+	height: 49%;
+	background-color: #b4d8f0; 
+	font: 10px;
+	color: #fff; 
+	float: left;
+}
+#enter_btn, #exit_btn{
+	display: block;
+	margin-top:3px;
+	margin-left:3px;
+	margin-right:3px;
+	margin-bottom:3px;
+	display:inline;
+	width: 100%;
+	height: 49%;
+	background-color: #b4d8f0; 
+	font:10px; 
+	color: #fff; 
+	float: right;
+}
+
+#stairs_pan{
+	margin-top: 5px;
+	text-align: center;
+	width:6%;
+	height: 100%;
+	float: left;
+}
+#exit_pan{
+	margin-top: 5px;
+	text-align: center;;
+	width:6%;
+	height: 100%;
+	float: right;
+}
+
+#Search_btn, #Finish_btn{
+position: relative; 
+display: inline-block; 
+width: 110px; 
+height: 30px; 
+background-color: #b4d8f0; 
+font: 14px/20px "Microsoft YaHei"; 
+color: #fff; 
+}
+
+#Search_btn, #Finish_btn:hover {
+  background: #c1e1f5;
+  
+}
+
+#goup,#godown {
+  position: relative; 
+display: inline-block; 
+width: 110px; 
+height: 30px; 
+background-color: #b4d8f0; 
+font: 14px/20px "Microsoft YaHei"; 
+color: #fff; 
+}
+
+#goup,#godown:hover {
+ background: #c1e1f5;
+}
