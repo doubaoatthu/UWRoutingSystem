@@ -5,9 +5,11 @@
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/jcanvas.min.js"></script>
   <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="js/map_drawing.js"></script>
-  <link rel = "stylesheet" href="buttons.css" type="text/css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
   <link rel = "stylesheet" href="routes.css" type="text/css">
+  <link rel = "stylesheet" href="buttons.css" type="text/css">
   <style type="text/css">
 
   </style>
@@ -50,7 +52,9 @@
   <button id="downstairs_btn" ><span>Dn<span></button>
   </div>
   <div id="building_map">
-    <canvas id="map" width="1076" height="1076" onclick = "newpoint"></canvas>
+    <a href="#myPopup" data-rel="popup" >
+      <canvas id="map" width="1076" height="1076" onclick = "newpoint"></canvas>
+    </a>
   </div>
   <div id="exit_pan">
   <button id="exit_btn"><span>Ex<span></button>
@@ -58,32 +62,8 @@
   </div>
 </div>
 
-<div id="popuup_div" class="popup_msg">
-   ....you can write the mssage here...
+<div data-role="popup" id="myPopup">
+      <p>This is a simple popup.</p>
 </div>
-<!-- 
-<div id='Feedback_pan' />
-<ul class='tabs'>
-<li><a href='#Reco_food'>Result</a></li>
-<li><a href='#Search_result'>Near</a></li>
-<li><a href='#Feed_back'>Recom</a></li>
-</ul>
-</div>
-<div id='Search_result'>
-<div id='mapCanvas'></div>
-</div>
-<div id='Reco_food'>
-  <canvas id="map" height="677" width="1076" onclick = "newpoint"></canvas>
-</div> -->
-<!-- <ul class="thumb" style="display:block">
-<la><img src="http://limg.sulekhalive.com/mstore/14721044/albums/default/original/chef-special-1.jpg" /> -->
-<!-- 
-<div id='Feed_back'></div> -->
- <!--  <div id="result">
-    <canvas id="map" height="677" width="1076" onclick = "newpoint"></canvas>
-  </div>
-  <div id="finish">
-    <Button id="finish">finish</Button>
-  </div> -->
 </body>
 </html>
