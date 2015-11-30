@@ -3,7 +3,6 @@ var stage;
 var cluearea;
 var curBuilding;
 var curFloor;
-var popup;
 var data = {
     data: {
       paths: [
@@ -43,7 +42,6 @@ var isfirst = true;
 $(document).ready(function() {
   canvas = document.getElementById("map");
   cluearea = document.getElementById("clue");
-  popup = document.getElementById("popup_div");
   stage = new createjs.Stage(canvas);
   $("#Search_btn").on("click", search);
   $("#Finish_btn").on("click", submitroute);
@@ -55,18 +53,6 @@ $(document).ready(function() {
   $("#submit_btn").on("click", submittoServer);
   //test();
 });
-
-function popuptest (event){
-  //getting height and width of the message box
-  var height = $('#popuup_div').height();
-  var width = $('#popuup_div').width();
-  //calculating offset for displaying popup message
-  leftVal=e.pageX-(width/2)+"px";
-  topVal=e.pageY-(height/2)+"px";
-  //show the popup message and hide with fading effect
-  console.log("popopopopop");
-  $('#popuup_div').css({left:leftVal,top:topVal}).show().fadeOut(1500);
-}
 
 function submitroute(event){
 	console.log("finish");
@@ -221,11 +207,7 @@ function clickMap(event) {
 function newpoint(event) {
   if(exited)  return;
   console.log("newpoint");
-    var xx = event.clientX;
-    var yy = event.clientY;
-    var pt = stage.globalToLocal(xx, yy);
-    pt.x = stage.mouseX;
-    pt.y = stage.mouseY;
+    var pt = {x:stage.mouseX, y:stage.mouseY};
     if(isfirst){
     	var distance = (dc1350[0]-pt.x)*(dc1350[0]-pt.x) + (dc1350[1]-pt.y)*(dc1350[1]-pt.y);
     	if(distance > 300)
@@ -241,9 +223,6 @@ function newpoint(event) {
     canExit(pt.x, pt.y, myindex);
     console.log(data.data);
     drawAllPaths(data.data);
-    popup.css('left','100px');
-    popup.css('right','100px');
-    popup.show();
 }
 
 function search(event) {
