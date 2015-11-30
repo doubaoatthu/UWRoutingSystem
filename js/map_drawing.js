@@ -209,6 +209,7 @@ function enterbuilding(event){
 
 function clickMap(event) {
     console.log("click map");
+    event.preventDefault = true;
     var xx = event.clientX;
     var yy = event.clientY;
     var pt = stage.globalToLocal(xx, yy);
@@ -221,15 +222,12 @@ function clickMap(event) {
     if(nearlift){
       console.log("click map can go up");
       $("#stairs-dialog").dialog({position: {of:event}});
-      $("#stairs-dialog").dialog("option", "position", {of: event});
     }
     if(nearexit){
       console.log("click map can go up");
       $("#exit-dialog").dialog({position: {of:event}});
       $("#exit-dialog").dialog("option", "position", {of: event});
     }
-
-  
   newpoint(event);
 }
 
