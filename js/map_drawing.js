@@ -47,7 +47,7 @@ $(document).ready(function() {
   stage = new createjs.Stage(canvas);
   $("#Search_btn").on("click", search);
   $("#Finish_btn").on("click", submitroute);
-  $("#map").on("click", newpoint);
+  $("#map").on("click", clickMap);
   $("#upstairs_btn").on("click", upstairs);
   $("#downstairs_btn").on("click", downstairs);
   $("#exit_btn").on("click", exitbuilding);
@@ -172,7 +172,7 @@ function upstairs(event){
     pointList:[]
   }
   cluearea.innerHTML="You are now on Floor "+ curFloor + " of "+curBuilding+" building! If you still want to go up/down on the stairs, please keep click the left buttons. If you want to enter this floor, please click the En button first and then click on the map."
-  
+
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
 }
@@ -213,7 +213,13 @@ function enterbuilding(event){
   cluearea.innerHTML="You have now entered Floor"+curFloor+" of "+curBuilding+" building. Please click on the map to record you route!";
 }
 
-function newpoint(event){
+function clickMap(event) {
+  alert("test");
+  $("#survey-dialog").dialog();
+  newpoint(event);
+}
+
+function newpoint(event) {
   if(exited)  return;
   console.log("newpoint");
     var xx = event.clientX;

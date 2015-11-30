@@ -5,9 +5,9 @@
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/jcanvas.min.js"></script>
   <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="js/map_drawing.js"></script>
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel = "stylesheet" href="css/routes.css" type="text/css">
   <link rel = "stylesheet" href="css/buttons.css" type="text/css">
   <style type="text/css">
@@ -52,9 +52,7 @@
   <button id="downstairs_btn" ><span>Dn<span></button>
   </div>
   <div id="building_map">
-    <a href="#myPopup" data-rel="popup" >
-      <canvas id="map" width="1076" height="1076" onclick = "newpoint"></canvas>
-    </a>
+    <canvas id="map" width="1076" height="1076"></canvas>
   </div>
   <div id="exit_pan">
   <button id="exit_btn"><span>Ex<span></button>
@@ -62,8 +60,8 @@
   </div>
 </div>
 
-<div data-role="popup" id="myPopup">
-      <p>This is a simple popup.</p>
+<div id="survey-dialog" title="Survey" style="display:none">
+  Test
 </div>
 </body>
 </html>
