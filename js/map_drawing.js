@@ -53,20 +53,8 @@ $(document).ready(function() {
   $("#exit_btn").on("click", exitbuilding);
   $("#enter_btn").on("click", enterbuilding);
   $("#submit_btn").on("click", submittoServer);
-  //test();
-});
 
-function popuptest (event){
-  //getting height and width of the message box
-  var height = $('#popuup_div').height();
-  var width = $('#popuup_div').width();
-  //calculating offset for displaying popup message
-  leftVal=e.pageX-(width/2)+"px";
-  topVal=e.pageY-(height/2)+"px";
-  //show the popup message and hide with fading effect
-  console.log("popopopopop");
-  $('#popuup_div').css({left:leftVal,top:topVal}).show().fadeOut(1500);
-}
+});
 
 function submitroute(event){
 	console.log("finish");
@@ -108,12 +96,14 @@ function submittoServer(event){
 }
 
 function canGoup(x, y, floor){
+  console.log("can go up x:"+x+" y:"+y);
   nearlift = false;
   $.each(stairsList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
     if(distance <= 300){
         nearlift = true;
         cluearea.innerHTML="You are close to the STAIRS, you can now click Up/Dn on the left side to go upstairs or downstairs.";
+        return true;
     }
   });
   $.each(liftList[floor], function (i, pos){
@@ -121,8 +111,10 @@ function canGoup(x, y, floor){
     if(distance <= 300){
         nearlift = true;
         cluearea.innerHTML="You are close to the ELEVATOR, you can now click Up/Dn on the left side to go upstairs or downstairs.";
+        return true;
     }
   });
+  return false;
 }
 
 function canExit(x, y, floor){
@@ -214,7 +206,21 @@ function enterbuilding(event){
 }
 
 function clickMap(event) {
-  $("#survey-dialog").dialog();
+    console.log("click map");
+    var xx = event.clientX;
+    var yy = event.clientY;
+    var pt = stage.globalToLocal(xx, yy);
+    pt.x = stage.mouseX;
+    pt.y = stage.mouseY;
+    var myindex = (curBuilding.valueOf() == "mc".valueOf())? -1:3;
+    myindex += curFloor;
+    canGoup(pt.x, pt.y, myindex)
+    if(nearlift){
+      console.log("click map can go up");
+      $("#stairs-dialog").dialog({position: {of:event}});
+      $("#stairs-dialog").dialog("option", "position", {of: event});
+    }
+  
   newpoint(event);
 }
 
@@ -241,9 +247,6 @@ function newpoint(event) {
     canExit(pt.x, pt.y, myindex);
     console.log(data.data);
     drawAllPaths(data.data);
-    popup.css('left','100px');
-    popup.css('right','100px');
-    popup.show();
 }
 
 function search(event) {
