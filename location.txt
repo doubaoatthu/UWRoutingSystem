@@ -1,0 +1,7 @@
+{"data":{"paths":[[{"mapURL":"maps/mc1.png","pointList":[]},{"mapURL":"maps/mc1.png","pointList":[]}]],"survey":[]}}
+["1","5","off","off","off"]
+["1","5","off","off","off"]
+["1","5","off","off","off"]
+["1","5","off","off","off"]
+["1","5","off","off","off"]
+["1","5","off","off","off"]

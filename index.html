@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html  style="height: 100%;">
+<head>
+  <title>UofW In-building Route Recording</title>
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/jcanvas.min.js"></script>
+  <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
+  <script type="text/javascript" src="js/map_drawing.js"></script>
+  <link rel = "stylesheet" href="buttons.css" type="text/css">
+  <link rel = "stylesheet" href="routes.css" type="text/css">
+  <style type="text/css">
+
+  </style>
+</head>
+<body style="height: 100%;">
+
+<div id = 'search_area'>
+<!-- <input type='text' class='form-control' id='searchfood' size='16' placeholder='Food'/>
+<label><input  id = 'if_vegan' type="checkbox" value="" />vegan</label> 
+<label><input  id = 'if_halal' type="checkbox" value="" />halal</label> 
+<label><input  id = 'if_spicy' type="checkbox" value="" />vgtble</label>  -->
+<select class="btn-select" id="startBui" name="startBui">
+  <option value="00">start building</option>
+  <option value="dc">DC</option>
+</select>
+<select class="btn-select" id="startRoom" name="startRoom">
+  <option value="000">start room</option>
+  <option value="1350">1350</option>
+</select>
+<select class="btn-select" id="endBui" name="endBui">
+  <option value="00">end building</option>
+  <option value="mc">MC</option>
+</select>
+<select class="btn-select" id="endRoom" name="endRoom">
+  <option value="000">end room</option>
+  <option value="4060">4060</option>
+</select>
+<button class = button button-action id='Search_btn' ><span>GO<span></button>
+<button class = button button-action id='Finish_btn' ><span>Finish<span></button>
+
+</div>
+
+<div id = "clue_area">
+  <h id="clue">Please select your start location and end location above and click "GO" to start record your route! Red circles are where stairs located, Yello circles are elevators, Green circles are Exits and Entrances</h>
+</div>
+
+<div id="label_pan">
+  <div id="stairs_pan">
+  <button id="upstairs_btn" ><span>Up<span></button>
+  <button id="downstairs_btn" ><span>Dn<span></button>
+  </div>
+  <div id="building_map">
+    <canvas id="map" width="1076" height="1076" onclick = "newpoint"></canvas>
+  </div>
+  <div id="exit_pan">
+  <button id="exit_btn"><span>Ex<span></button>
+  <button id="enter_btn"><span>En<span></button>
+  </div>
+</div>
+
+<div id="popuup_div" class="popup_msg">
+   ....you can write the mssage here...
+</div>
+<!-- 
+<div id='Feedback_pan' />
+<ul class='tabs'>
+<li><a href='#Reco_food'>Result</a></li>
+<li><a href='#Search_result'>Near</a></li>
+<li><a href='#Feed_back'>Recom</a></li>
+</ul>
+</div>
+<div id='Search_result'>
+<div id='mapCanvas'></div>
+</div>
+<div id='Reco_food'>
+  <canvas id="map" height="677" width="1076" onclick = "newpoint"></canvas>
+</div> -->
+<!-- <ul class="thumb" style="display:block">
+<la><img src="http://limg.sulekhalive.com/mstore/14721044/albums/default/original/chef-special-1.jpg" /> -->
+<!-- 
+<div id='Feed_back'></div> -->
+ <!--  <div id="result">
+    <canvas id="map" height="677" width="1076" onclick = "newpoint"></canvas>
+  </div>
+  <div id="finish">
+    <Button id="finish">finish</Button>
+  </div> -->
+</body>
+</html>

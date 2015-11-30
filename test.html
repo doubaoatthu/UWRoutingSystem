@@ -1,0 +1,41 @@
+<form>
+<input type=button value="Create layer"
+onclick="makeLayer('LYR1',400,250,100,100,'red',1,1)">
+<input type=button value="Delete layer"
+onclick="deleteLayer('LYR1')">
+</form>
+To create a new layer, this code calls the function makeLayer:
+makeLayer(ID,left,top,width,height,color,visible,zIndex)
+and here's the JavaScript source code of this function:
+function makeLayer(id,L,T,W,H,bgColor,visible,zIndex) {
+ if (document.getElementById) {
+  if (document.getElementById(id)) {
+   alert ('Layer with this ID already exists!');
+   return;
+  }
+  var ST = 'position:absolute'
+  +'; left:'+L
+  +'; top:'+T
+  +'; width:'+W
+  +'; height:'+H
+  +'; clip:rect(0,'+W+','+H+',0)'
+  +'; visibility:'
+  +(null==visible || 1==visible ? 'visible':'hidden')
+  +(null==zIndex  ? '' : '; z-index:'+zIndex)
+  +(null==bgColor ? '' : '; background-color:'+bgColor);
+
+  var LR = '<DIV id='+id+' style="'+ST+'"></DIV>'
+
+  if (document.body) {
+   if (document.body.insertAdjacentHTML)
+       document.body.insertAdjacentHTML("BeforeEnd",LR);
+   else if (document.createElement
+        &&  document.body.appendChild) {
+    var newNode = document.createElement('div');
+    newNode.setAttribute('id',id);
+    newNode.setAttribute('style',ST);
+    document.body.appendChild(newNode);
+   }
+  }
+ }
+}
