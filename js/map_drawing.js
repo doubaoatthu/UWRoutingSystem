@@ -214,7 +214,6 @@ function enterbuilding(event){
 }
 
 function clickMap(event) {
-  alert("test");
   $("#survey-dialog").dialog();
   newpoint(event);
 }
