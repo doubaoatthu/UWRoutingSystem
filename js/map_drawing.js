@@ -3,7 +3,6 @@ var stage;
 var cluearea;
 var curBuilding;
 var curFloor;
-var popup;
 var data = {
     data: {
       paths: [
@@ -43,7 +42,6 @@ var isfirst = true;
 $(document).ready(function() {
   canvas = document.getElementById("map");
   cluearea = document.getElementById("clue");
-  popup = document.getElementById("popup_div");
   stage = new createjs.Stage(canvas);
   $("#Search_btn").on("click", search);
   $("#Finish_btn").on("click", submitroute);
@@ -53,6 +51,7 @@ $(document).ready(function() {
   $("#exit_btn").on("click", exitbuilding);
   $("#enter_btn").on("click", enterbuilding);
   $("#submit_btn").on("click", submittoServer);
+
 
 });
 
@@ -227,11 +226,7 @@ function clickMap(event) {
 function newpoint(event) {
   if(exited)  return;
   console.log("newpoint");
-    var xx = event.clientX;
-    var yy = event.clientY;
-    var pt = stage.globalToLocal(xx, yy);
-    pt.x = stage.mouseX;
-    pt.y = stage.mouseY;
+    var pt = {x:stage.mouseX, y:stage.mouseY};
     if(isfirst){
     	var distance = (dc1350[0]-pt.x)*(dc1350[0]-pt.x) + (dc1350[1]-pt.y)*(dc1350[1]-pt.y);
     	if(distance > 300)
