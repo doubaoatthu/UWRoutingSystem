@@ -33,37 +33,7 @@ background-repeat:no-repeat;
 	
  
 }
-.transbox{
-	filter:alpha(opacity=60);
-  /* CSS3 standard */
-  	opacity:0.1;
-}
 
-#building_map{
-	text-align: center;
-	margin-top:5px;
-	margin-left:5px;
-	margin-right:5px;
-	margin-bottom:5px;
-	padding-top:5px;
-	padding-bottom:5px;
-	padding-left:5px;
-	padding-right:5px;
-	height: 100%;
-	width: 100%;
-	background-color: black; 
-	filter:alpha(opacity=60);
-  /* CSS3 standard */
-  	opacity:0.1;
-}
-#map{
-	margin-top:7px;
-	margin-left:3px;
-	margin-right:3px;
-	margin-bottom:3px;
-	height: 95%;
-	width: 100%;
-}
 .btn-select { 
 position: relative; 
 display: inline-block; 

@@ -17,6 +17,31 @@ background-image:
 url("maps/background1.jpg");
 background-repeat: repeat-y
 }
+#building_map{
+  position: relative;
+  text-align: center;
+  margin-top:15px;
+  height: 95%;
+  width: 90%;
+  opacity:1.0;
+  z-index: 30;
+}
+#container {
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  width: 98%;
+  background-color: black; 
+  filter:alpha(opacity=60);
+  /* CSS3 standard */
+  opacity: 0.4;
+  z-index: 20;
+}
+#map{
+  height: 100%;
+  width: 100%;
+  opacity: 1.0;
+}
   </style>
 </head>
 <body style="height: 100%; text-align: center;" >
@@ -43,11 +68,12 @@ background-repeat: repeat-y
 <button class = button button-action id='Finish_btn' ><span>Finish<span></button>
 
 </div>
-
-<div class = "transbox" id="building_map">
+</div text-align = "center">
+<div id="container" width="1176" height="1176" ></div>
+<div id="building_map">
     <canvas id="map" width="1076" height="1076"></canvas>
 </div>
-
+</div>
 
 <div id="stairs-dialog" class = smalldialog title="stairs" style="display:none">
   <button class = button button-action width= "110" height = "20" id="goup"><span>UP</span></button>
