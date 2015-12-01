@@ -58,7 +58,10 @@ $(document).ready(function() {
   $("#godown").on("click", downstairs);
   $("#goexit").on("click", exitbuilding);
   $("#goenter").on("click", enterbuilding);
-
+  var map = new createjs.Bitmap("/maps/map_colour.png");
+  stage.addChild(map);
+  map.image.onload = function() { stage.update(); };
+  stage.update();
 });
 
 function submitroute(event){
@@ -337,6 +340,7 @@ function drawPath(stage, indexOfpath, path) {
       footprint.regX = 30;
       footprint.regY = 30;
       stage.addChild(footprint);
+      footprint.image.onload = function(){stage.update(); };
       console.log("in pointList:"+j)
     });
     stage.update();
