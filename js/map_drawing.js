@@ -289,6 +289,8 @@ function search(event) {
 
 function drawAllPaths(data) {
   console.log(data.paths);
+  stage.removeAllChildren();
+stage.update();
   $.each(data.paths, function (i, path) {
       drawPath(stage, i, path);
   });
