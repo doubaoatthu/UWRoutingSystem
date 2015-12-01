@@ -11,16 +11,18 @@
   <link rel = "stylesheet" href="css/routes.css" type="text/css">
   <link rel = "stylesheet" href="css/buttons.css" type="text/css">
   <style type="text/css">
-
+  body
+{ 
+background-image: 
+url("maps/background1.jpg");
+background-repeat: repeat-y
+}
   </style>
 </head>
-<body style="height: 100%;">
+<body style="height: 100%; text-align: center;" >
 
 <div id = 'search_area'>
-<!-- <input type='text' class='form-control' id='searchfood' size='16' placeholder='Food'/>
-<label><input  id = 'if_vegan' type="checkbox" value="" />vegan</label>
-<label><input  id = 'if_halal' type="checkbox" value="" />halal</label>
-<label><input  id = 'if_spicy' type="checkbox" value="" />vgtble</label>  -->
+
 <select class="btn-select" id="startBui" name="startBui">
   <option value="00">start building</option>
   <option value="dc">DC</option>
@@ -42,40 +44,24 @@
 
 </div>
 
-<div id = "clue_area">
-  <h id="clue">Please select your start location and end location above and click "GO" to start record your route! Red circles are where stairs located, Yello circles are elevators, Green circles are Exits and Entrances</h>
-</div>
-
-<div id="label_pan">
-  <div id="stairs_pan">
-  <button id="upstairs_btn" ><span>Up<span></button>
-  <button id="downstairs_btn" ><span>Dn<span></button>
-  </div>
-  <div id="building_map">
+<div class = "transbox" id="building_map">
     <canvas id="map" width="1076" height="1076"></canvas>
-  </div>
-  <div id="exit_pan">
-  <button id="exit_btn"><span>Ex<span></button>
-  <button id="enter_btn"><span>En<span></button>
-  </div>
 </div>
 
-<div id="survey-dialog" title="Survey" style="display:none">
-  Test
-</div>
-<div id="stairs-dialog" title="stairs" style="display:none">
+
+<div id="stairs-dialog" class = smalldialog title="stairs" style="display:none">
   <button class = button button-action width= "110" height = "20" id="goup"><span>UP</span></button>
   <button class = button button-action width= "110" height = "20" id="godown"><span>DOWN</span></button>
 </div>
-<div id="elevator-dialog" title="Elevator" style="display:none">
+
+<div id="elevator-dialog" class = "smalldialog" title="Elevator" style="display:none">
   <button class = button button-action width= "110" height = "20" id="goup"><span>UP</span></button>
   <button class = button button-action width= "110" height = "20" id="godown"><span>DOWN</span></button>
 </div>
-<div id="entrance-dialog" title="Entrance" style="display:none">
-  <button class = button button-action width= "110" height = "20" id="goenter"><span>ENTER</span></button>
-</div>
-<div id="exit-dialog" title="Exit" style="display:none">
-  <button class = button button-action width= "110" height = "20" id="goexit"><span>EXIT</span></button>
+
+<div id="exit-dialog" class = "smalldialog" title="Exit" style="display:none">
+  <button class = button button-action width= "110" height = "20" id="goenter"><span>Enter</span></button>
+  <button class = button button-action width= "110" height = "20" id="goexit"><span>Exit</span></button>
 </div>
 </body>
 </html>

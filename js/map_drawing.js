@@ -1,5 +1,6 @@
 var canvas;
 var stage;
+var footprinturl = "/maps/footprint.png";
 var cluearea;
 var curBuilding;
 var curFloor;
@@ -20,7 +21,7 @@ var stairsList = [[[253.34592847039806,126.16112970369765],[877.1896679463864,11
                   [[129.125841146334,318.796992481203],[252.18636761635346,149.01640682393273],[835.4454772007813,148.10219573912332],[913.1360544217687,364.7702228389519],[820.3711860982016,656.4035588931515],[251.02680676230887,644.5188147906293]],
                   [[106.08170000673536,150.84482899355154],[710.2129049639658,151.75904007836093],[770.5100693742843,375.74075585666475],[691.6599312992523,673.7735695045302],[103.76257829864619,660.0604032323891]],
                   [[136,761.33],[796.53,767.34],[124.63467367144877,168.2148396049302],[821.5307469522462,168.2148396049302],[851.6793291574055,444.30658721736995]],
-                  [[789.5647866457064,832.094522019334],[340.9647481933025,882.6638023630505],[338.62828965969624,488.453276047261],[78.50257291819817,504.54350161117077],[73.05083633978354,878.0665950590762],[690.5003704452077,546.3978450738715],[688.1812487371186,841.2570402416129],[885.3065939246985,844.0519141294587],[886.4661547787432,547.7952820177944],[927.0507846703038,118.78214023345032],[976.911901394221,191.44886131744346],[980.3905839563548,519.8465431393355],[981.5501448103994,866.4109052322259],[980.3905839563548,990.782793241368]],
+                  [[340.9647481933025,882.6638023630505],[338.62828965969624,488.453276047261],[78.50257291819817,504.54350161117077],[73.05083633978354,878.0665950590762],[690.5003704452077,546.3978450738715],[688.1812487371186,841.2570402416129],[885.3065939246985,844.0519141294587],[886.4661547787432,547.7952820177944],[927.0507846703038,118.78214023345032],[976.911901394221,191.44886131744346],[980.3905839563548,519.8465431393355],[981.5501448103994,866.4109052322259],[980.3905839563548,990.782793241368]],
                   [[66.65663096921936,533.820912578565],[65.49707011517478,913.923761325606],[128.11335623358255,874.7955268957636],[339.15343166969757,916.7186352134519],[392.49323095574863,877.5904007836094],[576.8634067488381,825.8852338584605],[671.9473967804944,874.7955268957636],[870.2323028221189,877.5904007836094],[997.7839967670236,1025.7187168394416],[1000.1031184751128,905.5391396620684],[998.9435576210682,543.6029711860256],[1000.1031184751128,209.61554158844174],[946.7633191890617,117.38470328952738],[870.2323028221189,567.3593992327156],[671.9473967804944,565.9619622887927],[576.8634067488381,619.0645661578646],[394.81235266383777,571.5517100644845],[339.15343166969757,535.2183495224879]],
                   [[71.49319731737936,533.2760472610097],[66.82028025016682,917.1428571428571],[90.96368509743161,874.6186895810956],[341.7435677045046,537.8732545649839],[371.33870913018404,575.8002148227712],[338.62828965969624,917.1428571428571],[364.3293335293652,875.7679914070892],[567.6012259531108,624.0708915145005],[563.7071283971003,833.2438238453276],[658.7231087637552,574.6509129967776],[664.1748453421699,883.813104189044],[871.3408353219259,873.469387755102],[869.0043767883195,581.546723952739],[991.2790400470477,541.3211600429646],[989.7214010246436,210.32223415682063],[985.8273034686331,907.9484425349087],[996.7307766254623,1026.3265306122448]]
                   ];
@@ -35,7 +36,7 @@ var exitList = [[[881.8279113625648,128.90376295812587],[1022.1347747019599,526.
                 [[891.5901426131802,674.5435016111708],[204.64437260052534,77.70794220879928],[195.36788576816863,142.61692923026692],[878.349228800431,132.56060729736348],[979.2310231023102,363.8560117541425],[1037.2090658045397,548.526650885642],[213.92085943288205,661.8888254020079]],
                 [[30,47]],
                 [[13,37]],
-                [[791.1224256681106,820.6015037593985],[1009.1918888046957,567.7551020408164],[627.8840843268,855.2314096808424],[625.5649626187109,532.423475634642],[997.7839967670236,831.4749816341523],[903.859567589412,311.62843849481675],[903,241],[903.859567589412,160.70524855113868],[905.0191284434566,81.05134274753081]],
+                [[1009.1918888046957,567.7551020408164],[627.8840843268,855.2314096808424],[625.5649626187109,532.423475634642],[997.7839967670236,831.4749816341523],[903.859567589412,311.62843849481675],[903,241],[903.859567589412,160.70524855113868],[905.0191284434566,81.05134274753081]],
                 [[926.63,48.72]],
                 [[935,40]]
                 ];
@@ -43,16 +44,16 @@ var dc1350=[780,820];
 var isfirst = true;
 $(document).ready(function() {
   canvas = document.getElementById("map");
-  cluearea = document.getElementById("clue");
+  //cluearea = document.getElementById("clue");
   stage = new createjs.Stage(canvas);
   $("#Search_btn").on("click", search);
   $("#Finish_btn").on("click", submitroute);
   $("#map").on("click", clickMap);
-  $("#upstairs_btn").on("click", upstairs);
-  $("#downstairs_btn").on("click", downstairs);
-  $("#exit_btn").on("click", exitbuilding);
-  $("#enter_btn").on("click", enterbuilding);
-  $("#submit_btn").on("click", submittoServer);
+  // $("#upstairs_btn").on("click", upstairs);
+  // $("#downstairs_btn").on("click", downstairs);
+  // $("#exit_btn").on("click", exitbuilding);
+  // $("#enter_btn").on("click", enterbuilding);
+  // $("#submit_btn").on("click", submittoServer);
   $("#goup").on("click", upstairs);
   $("#godown").on("click", downstairs);
   $("#goexit").on("click", exitbuilding);
@@ -104,17 +105,17 @@ function canGoup(x, y, floor){
   nearlift = false;
   $.each(stairsList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
-    if(distance <= 300){
+    if(distance <= 400){
         nearlift = true;
-        cluearea.innerHTML="You are close to the STAIRS, you can now click Up/Dn on the left side to go upstairs or downstairs.";
+        //cluearea.innerHTML="You are close to the STAIRS, you can now click Up/Dn on the left side to go upstairs or downstairs.";
         return true;
     }
   });
   $.each(liftList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
-    if(distance <= 300){
+    if(distance <= 400){
         nearlift = true;
-        cluearea.innerHTML="You are close to the ELEVATOR, you can now click Up/Dn on the left side to go upstairs or downstairs.";
+        //cluearea.innerHTML="You are close to the ELEVATOR, you can now click Up/Dn on the left side to go upstairs or downstairs.";
         return true;
     }
   });
@@ -125,9 +126,9 @@ function canExit(x, y, floor){
   nearexit = false;
   $.each(exitList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
-    if(distance <= 300){
+    if(distance <= 400){
         nearexit = true;
-        cluearea.innerHTML="You are close to an EXIT of building "+curBuilding+" , you can now click Ex on the right side to exit the building.";
+        //cluearea.innerHTML="You are close to an EXIT of building "+curBuilding+" , you can now click Ex on the right side to exit the building.";
 
     }
   });
@@ -140,11 +141,12 @@ function downstairs(event){
     curFloor += 1;
     return;
   }
-  cluearea.innerHTML="You are now on Floor "+ curFloor + " of "+curBuilding+" building! If you still want to go up/down on the stairs, please keep click the left buttons. If you want to enter this floor, please click the En button first and then click on the map."
+  //cluearea.innerHTML="You are now on Floor "+ curFloor + " of "+curBuilding+" building! If you still want to go up/down on the stairs, please keep click the left buttons. If you want to enter this floor, please click the En button first and then click on the map."
   var firstmap = {
     mapURL: "maps/"+curBuilding+curFloor+".png",
     pointList:[]
   }
+  $("#stairs-dialog").dialog('close');
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
 }
@@ -167,8 +169,8 @@ function upstairs(event){
     mapURL: "maps/"+curBuilding+curFloor+".png",
     pointList:[]
   }
-  cluearea.innerHTML="You are now on Floor "+ curFloor + " of "+curBuilding+" building! If you still want to go up/down on the stairs, please keep click the left buttons. If you want to enter this floor, please click the En button first and then click on the map."
-
+  //cluearea.innerHTML="You are now on Floor "+ curFloor + " of "+curBuilding+" building! If you still want to go up/down on the stairs, please keep click the left buttons. If you want to enter this floor, please click the En button first and then click on the map."
+  $("#stairs-dialog").dialog('close');
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
 }
@@ -199,14 +201,17 @@ function exitbuilding(event){
     mapURL: "maps/"+curBuilding+curFloor+".png",
     pointList:[]
   }
-  cluearea.innerHTML="You have now exited Floor "+lastfloor+" of "+lastbuilding+" building. Now you are presented the Entrance on Floor "+ curFloor + " of "+curBuilding+" building! If this is not the Entrance you expected, please keep the Up/Dn buttons to adjust the floor levels. If you want to enter this entrance, please click on the En button on the right."
+  $("#exit-dialog").dialog('close');
+  //cluearea.innerHTML="You have now exited Floor "+lastfloor+" of "+lastbuilding+" building. Now you are presented the Entrance on Floor "+ curFloor + " of "+curBuilding+" building! If this is not the Entrance you expected, please keep the Up/Dn buttons to adjust the floor levels. If you want to enter this entrance, please click on the En button on the right."
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
 }
 
 function enterbuilding(event){
   exited = false;
-  cluearea.innerHTML="You have now entered Floor"+curFloor+" of "+curBuilding+" building. Please click on the map to record you route!";
+  //cluearea.innerHTML="You have now entered Floor"+curFloor+" of "+curBuilding+" building. Please click on the map to record you route!";
+  $("#exit-dialog").dialog('close');
+  newpoint(event);
 }
 
 function clickMap(event) {
@@ -239,7 +244,7 @@ function newpoint(event) {
     var pt = {x:stage.mouseX, y:stage.mouseY};
     if(isfirst){
     	var distance = (dc1350[0]-pt.x)*(dc1350[0]-pt.x) + (dc1350[1]-pt.y)*(dc1350[1]-pt.y);
-    	if(distance > 300)
+    	if(distance > 500)
     		return;
     }
     isfirst = false;
@@ -247,7 +252,7 @@ function newpoint(event) {
     data.data.paths[0][arrlen-1].pointList.push(pt);
     var myindex = (curBuilding.valueOf() == "mc".valueOf())? -1:3;
     myindex += curFloor;
-    cluearea.innerHTML="Recording......  You are now on Floor "+curFloor+" of "+curBuilding+" building.";
+    //cluearea.innerHTML="Recording......  You are now on Floor "+curFloor+" of "+curBuilding+" building.";
     canGoup(pt.x, pt.y, myindex);
     canExit(pt.x, pt.y, myindex);
     console.log(data.data);
@@ -268,7 +273,7 @@ function search(event) {
     mapURL: "maps/"+curBuilding+curFloor+".png",
     pointList:[]
   }
-  cluearea.innerHTML="Please click the BLUE SQUARE to start! You can start record your route now! You are now on Floor "+curFloor+" of "+curBuilding+" building. Please click on the map to record your route. Please make sure that you have clicked each time you turn.";
+  //cluearea.innerHTML="Please click the BLUE SQUARE to start! You can start record your route now! You are now on Floor "+curFloor+" of "+curBuilding+" building. Please click on the map to record your route. Please make sure that you have clicked each time you turn.";
   data.data.paths[0].push(firstmap);
   var day = new Date();
   data.data.id.push(day.getTime());
@@ -294,7 +299,7 @@ function drawPath(stage, indexOfpath, path) {
   var offset = {x: 0, y: 0};
   var line = new createjs.Shape();
   var circle = new createjs.Shape();
-  line.graphics.setStrokeStyle(3).beginStroke("#00F5FF");
+  line.graphics.setStrokeStyle(4).beginStroke("grey");
   var segment = path[path.length-1];
   var mapURL = segment.mapURL;
     //var width = segment.mapWidth;
@@ -311,13 +316,29 @@ function drawPath(stage, indexOfpath, path) {
     //console.log(pointList);
     $.each(pointList, function (j, point) {
       //console.log(point);
-      circle.graphics.beginFill("blue").drawCircle(point.x-10, point.y-10, 30);
+      var footprint = new createjs.Bitmap(footprinturl);
+      footprint.x = point.x+10;
+      footprint.y = point.y+10;
+      footprint.regX = 30;
+      footprint.regY = 30;
+      //circle.graphics.beginFill("blue").drawCircle(point.x-10, point.y-10, 15);
       drawSegment(line.graphics, offset, lastPoint, point);
+      stage.addChild(footprint);
       lastPoint = point;
     });
     //drawStairs(circle);
-    stage.addChild(circle);
+    //stage.addChild(circle);
     stage.addChild(line);
+    $.each(pointList, function (j, point) {
+      //console.log(point);
+      var footprint = new createjs.Bitmap(footprinturl);
+      footprint.x = point.x+10;
+      footprint.y = point.y+10;
+      footprint.regX = 30;
+      footprint.regY = 30;
+      stage.addChild(footprint);
+      console.log("in pointList:"+j)
+    });
     stage.update();
 }
 
