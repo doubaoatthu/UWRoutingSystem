@@ -8,6 +8,11 @@ background-repeat: repeat-y
 form {
 	margin: 40px 0;
 }
+table{
+margin-left: auto; 
+margin-right: auto; 
+opacity:0.8;
+}
 
 .question{
 	font-size: 20px;
@@ -16,10 +21,13 @@ form {
 
 .title{
 	font-size: 40px;
-	color:black;
+	color:white;
 }
 #question_canvas{
 	text-align: center;
+
+	margin-left: auto; 
+margin-right: auto; 
 	width: 80%;
 	font-size: 20px;
 }
@@ -38,19 +46,15 @@ form {
 	padding-right:10px;
 }
 #submit_btn{
-	width: 50%;
-	background-color: #b4d8f0; 
-font: 14px/20px "Microsoft YaHei"; 
-color: #fff; 
+	position: relative; 
+display: inline-block; 
+width: 50%; z-index: 30;
 }
 
 #options_canvas{
 	text-align: left;
-	width: 80%;
 }
-#myid{
-	color:white;
-}
+
 
 
 

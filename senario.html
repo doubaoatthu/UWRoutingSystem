@@ -1,28 +1,205 @@
 <!DOCTYPE html>
 <html  style="height: 100%;">
 <head>
-  <title>UW In-Building Campus Map</title>
+  <title>Survey</title>
   <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/jcanvas.min.js"></script>
   <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
   <script type="text/javascript" src="js/map_drawing.js"></script>
   <link rel = "stylesheet" href="css/buttons.css" type="text/css">
-  <link rel = "stylesheet" href="css/routes.css" type="text/css">
-  <link rel = "stylesheet" href="css/question.css" type="text/css">
+  <link rel = "stylesheet" href="question.css" type="text/css">
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
   <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
 </head>
 
 <body style="height: 100%;">
 <div id="question_canvas">
 	<div class = "oneitem">
-		<span class = "title">Dear Expert:</span>
+		<span class = "title">How do you feel today?</span>
 	</div>
-
+<div class = "table-responsive">
+<table class = "table">
+	<tbody>
+		<tr bgcolor="white">
+			<td>
+				<div class = "oneitem">
+	<span class="question">Weather condition:</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q9o1"><input checked class="mdl-radio__button" id="q9o1" name="q9" type="radio"value="1"><span class="mdl-radio__label">harsh (e.g. heavy snow/rain)</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q9o2"><input checked class="mdl-radio__button" id="q9o2" name="q9" type="radio"value="2"><span class="mdl-radio__label">bad (e.g. light snow/rain)</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q9o3"><input checked class="mdl-radio__button" id="q9o3" name="q9" type="radio"value="3"><span class="mdl-radio__label">okay (e.g. between cloudy and light snow/rain)</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q9o4"><input checked class="mdl-radio__button" id="q9o4" name="q9" type="radio"value="4"><span class="mdl-radio__label">good (e.g. cloudy)</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q9o5"><input checked class="mdl-radio__button" id="q9o5" name="q9" type="radio"value="5"><span class="mdl-radio__label">excellent (e.g. sunny)</span></label>
+	</div>
+	</div>
+			</td></tr>
+		<tr bgcolor="white"><td>
+			<div class = "oneitem">
+	<span class="question">11. Level of fatigue:</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q11o1"><input checked class="mdl-radio__button" id="q11o1" name="q11" type="radio"value="1"><span class="mdl-radio__label">not tired at all</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q11o2"><input checked class="mdl-radio__button" id="q11o2" name="q11" type="radio"value="2"><span class="mdl-radio__label">somewhat tired</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q11o3"><input checked class="mdl-radio__button" id="q11o3" name="q11" type="radio"value="3"><span class="mdl-radio__label">tired</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q11o4"><input checked class="mdl-radio__button" id="q11o4" name="q11" type="radio"value="4"><span class="mdl-radio__label">very tired</span></label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q11o5"><input checked class="mdl-radio__button" id="q11o5" name="q11" type="radio"value="5"><span class="mdl-radio__label">extremely tired</span></label>
+	</div>
+</div>
+		</td></tr>
+		<tr bgcolor="white"><td>
 
 <div class = "oneitem">
-	<button class = button button-action id='submit_btn' ><span>Submit<span></button>
+	<span class="question">12. Personal demands (e.g. vending machine, Tim Hortons, stores, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q12o1"><input checked class="mdl-radio__button" id="q12o1" name="q12" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q12o2"><input checked class="mdl-radio__button" id="q12o2" name="q12" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q12o3"><input checked class="mdl-radio__button" id="q12o3" name="q12" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q12o4"><input checked class="mdl-radio__button" id="q12o4" name="q12" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q12o5"><input checked class="mdl-radio__button" id="q12o5" name="q12" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div>
+		</td></tr>
+		<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">13. Walk across drop boxes/prof's offices (e.g. assignment submissions/pick ups, office hours, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q13o1"><input checked class="mdl-radio__button" id="q13o1" name="q13" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q13o2"><input checked class="mdl-radio__button" id="q13o2" name="q13" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q13o3"><input checked class="mdl-radio__button" id="q13o3" name="q13" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q13o4"><input checked class="mdl-radio__button" id="q13o4" name="q13" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q13o5"><input checked class="mdl-radio__button" id="q13o5" name="q13" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div>
+</td></tr>
+		<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">14. Avoidance of crowds at a particular time (e.g. heavy crowds outside MC2065 when class ends, crowds when special events take place, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q14o1"><input checked class="mdl-radio__button" id="q14o1" name="q14" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q14o2"><input checked class="mdl-radio__button" id="q14o2" name="q14" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q14o3"><input checked class="mdl-radio__button" id="q14o3" name="q14" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q14o4"><input checked class="mdl-radio__button" id="q14o4" name="q14" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q14o5"><input checked class="mdl-radio__button" id="q14o5" name="q14" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div>
+</td></tr>
+		<tr bgcolor="white"><td>
+
+<div class = "oneitem">
+	<span class="question">15. Curiosity of the floor environment (e.g. first time visit, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q15o1"><input checked class="mdl-radio__button" id="q15o1" name="q15" type="radio"value="1"><span class="mdl-radio__label">not curious at all</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q15o2"><input checked class="mdl-radio__button" id="q15o2" name="q15" type="radio"value="2"><span class="mdl-radio__label">somewhat curious</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q15o3"><input checked class="mdl-radio__button" id="q15o3" name="q15" type="radio"value="3"><span class="mdl-radio__label">curious</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q15o4"><input checked class="mdl-radio__button" id="q15o4" name="q15" type="radio"value="4"><span class="mdl-radio__label">very curious</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q15o5"><input checked class="mdl-radio__button" id="q15o5" name="q15" type="radio"value="5"><span class="mdl-radio__label">extremely curious</span></label>
+	</div>
+</div>
+</td></tr>
+		<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">16. Study tables/seats searching on a floor (e.g. possibly during the spare time between 2 classes, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q16o1"><input checked class="mdl-radio__button" id="q16o1" name="q16" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q16o2"><input checked class="mdl-radio__button" id="q16o2" name="q16" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q16o3"><input checked class="mdl-radio__button" id="q16o3" name="q16" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q16o4"><input checked class="mdl-radio__button" id="q16o4" name="q16" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q16o5"><input checked class="mdl-radio__button" id="q16o5" name="q16" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div>
+</td></tr>
+		<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">17. Attending special campus events (e.g. Pi day event on MC 3rd floor, software engineering project exhibition on DC 1st floor, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q17o1"><input checked class="mdl-radio__button" id="q17o1" name="q17" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q17o2"><input checked class="mdl-radio__button" id="q17o2" name="q17" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q17o3"><input checked class="mdl-radio__button" id="q17o3" name="q17" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q17o4"><input checked class="mdl-radio__button" id="q17o4" name="q17" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q17o5"><input checked class="mdl-radio__button" id="q17o5" name="q17" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div></td></tr>
+		<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">18. Hurry or not through this walk:</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q18o1"><input checked class="mdl-radio__button" id="q18o1" name="q18" type="radio"value="1"><span class="mdl-radio__label">not hurry at all</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q18o2"><input checked class="mdl-radio__button" id="q18o2" name="q18" type="radio"value="2"><span class="mdl-radio__label">somewhat hurry</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q18o3"><input checked class="mdl-radio__button" id="q18o3" name="q18" type="radio"value="3"><span class="mdl-radio__label">hurry</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q18o4"><input checked class="mdl-radio__button" id="q18o4" name="q18" type="radio"value="4"><span class="mdl-radio__label">very hurry</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q18o5"><input checked class="mdl-radio__button" id="q18o5" name="q18" type="radio"value="5"><span class="mdl-radio__label">extremely hurry</span></label>
+	</div>
+</div>
+</td></tr>
+	<tr bgcolor="white"><td>
+		<div class = "oneitem">
+	<span class="question">19. Printer or computer use (e.g. located in DC, MC labs, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q19o1"><input checked class="mdl-radio__button" id="q19o1" name="q19" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q19o2"><input checked class="mdl-radio__button" id="q19o2" name="q19" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q19o3"><input checked class="mdl-radio__button" id="q19o3" name="q19" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q19o4"><input checked class="mdl-radio__button" id="q19o4" name="q19" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q19o5"><input checked class="mdl-radio__button" id="q19o5" name="q19" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div>
+	</td></tr>
+	<tr bgcolor="white"><td>
+	<div class = "oneitem">
+	<span class="question">20. Friends/classmates meeting at a special location (e.g. study room, cafe, etc.):</span>
+	<div>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q20o1"><input checked class="mdl-radio__button" id="q20o1" name="q20" type="radio"value="1"><span class="mdl-radio__label">very undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q20o2"><input checked class="mdl-radio__button" id="q20o2" name="q20" type="radio"value="2"><span class="mdl-radio__label">undesired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q20o3"><input checked class="mdl-radio__button" id="q20o3" name="q20" type="radio"value="3"><span class="mdl-radio__label">neutral</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q20o4"><input checked class="mdl-radio__button" id="q20o4" name="q20" type="radio"value="4"><span class="mdl-radio__label">desired</span></label>
+
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q20o5"><input checked class="mdl-radio__button" id="q20o5" name="q20" type="radio"value="5"><span class="mdl-radio__label">very desired</span></label>
+	</div>
+</div></td></tr>
+<tr bgcolor="white">
+	<td>
+		<button type="button" class = "btn btn-primary" id='submit_btn' ><span>Go Record!<span></button>
+	</td>
+	</tr>
+	</tbody>
+</div>
+</div>
 </div>
 </body>
 </html>

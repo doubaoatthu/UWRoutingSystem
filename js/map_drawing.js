@@ -53,7 +53,7 @@ $(document).ready(function() {
   // $("#downstairs_btn").on("click", downstairs);
   // $("#exit_btn").on("click", exitbuilding);
   // $("#enter_btn").on("click", enterbuilding);
-  // $("#submit_btn").on("click", submittoServer);
+  $("#submit_btn").on("click", submittoServer);
   $("#goup").on("click", upstairs);
   $("#godown").on("click", downstairs);
   $("#goexit").on("click", exitbuilding);
@@ -75,13 +75,21 @@ function submitroute(event){
     }
   }
   xhr.send(JSON.stringify(data));
-  location.href="questionare.html?id="+data.data.id[0];
+  var map = new createjs.Bitmap("/maps/thankyou.png");
+  map.y = 100;
+  stage.removeAllChildren();
+  stage.update();
+  stage.addChild(map);
+  map.image.onload = function() { stage.update(); };
+  stage.update();
 }
 
 function submittoServer(event){
   var survey = [];
-  survey.push(document.URL.slice(-13));
-  for(var i = 1; i < 6; i++){
+  var day = new Date(); 
+  var myid = day.getTime();
+  survey.push(myid);
+  for(var i = 9; i < 20; i++){
     var results = document.getElementsByName("q"+i);
     var getN;
     for(var j = 0; j < results.length; j++){
@@ -100,7 +108,8 @@ function submittoServer(event){
     }
   }
   xhr.send(JSON.stringify(survey));
-  document.getElementById("question_canvas").innerHTML="Thank You!";
+  console.log(myid);
+  location.href="index.html?id="+myid;
 }
 
 function canGoup(x, y, floor){
@@ -278,8 +287,7 @@ function search(event) {
   }
   //cluearea.innerHTML="Please click the BLUE SQUARE to start! You can start record your route now! You are now on Floor "+curFloor+" of "+curBuilding+" building. Please click on the map to record your route. Please make sure that you have clicked each time you turn.";
   data.data.paths[0].push(firstmap);
-  var day = new Date();
-  data.data.id.push(day.getTime());
+  data.data.id.push(document.URL.slice(-13));
   console.log("id:"+data.data.id[0]);
   console.log("in search");
   console.log(data.data);
