@@ -115,7 +115,7 @@ function submitroute(event){
  	xhr.setRequestHeader('Content-Type', 'application/json');
   	xhr.onreadystatechange = function () { // 处理函数
     if (xhr.readyState == 4 && xhr.status == 200) {
-        alert(xhr.responseText);
+       // alert(xhr.responseText);
     }
   }
   $.each(data.data.paths, function (i, mypath){
@@ -174,7 +174,7 @@ function submittoServer(event){
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () { // 处理函数
     if (xhr.readyState == 4 && xhr.status == 200) {
-        alert(xhr.responseText);
+        //alert(xhr.responseText);
     }
   }
   xhr.send(JSON.stringify(survey));
