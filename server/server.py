@@ -46,7 +46,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write("test")
+            self.wfile.write("123")
 
 Handler = ServerHandler
 httpd = SocketServer.TCPServer(("", 8000), Handler)

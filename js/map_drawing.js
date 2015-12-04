@@ -102,12 +102,10 @@ function findroute(event){
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () { // 处理函数
     if (xhr.readyState == 4 && xhr.status == 200) {
-        alert(xhr.responseText);
+        location.href="showmap.html?id="+xhr.responseText;
     }
   }
   xhr.send(JSON.stringify(survey));
-  console.log(myid);
-  location.href="index.html?id="+myid;
 }
 
 function submitroute(event){
