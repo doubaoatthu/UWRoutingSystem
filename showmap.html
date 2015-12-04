@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html  style="height: 100%;">
+<head>
+  <title>UofW In-building Route Recording uuu</title>
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/jcanvas.min.js"></script>
+  <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
+  <script type="text/javascript" src="js/show.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel = "stylesheet" href="routes.css" type="text/css">
+  <link rel = "stylesheet" href="css/buttons.css" type="text/css">
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <style type="text/css">
+  </style>
+</head>
+<body style="height: 100%; text-align: center;" >
+<div>
+<h1>UofW In-Building Map System</h1>
+</div>  
+<div id="container" ></div>
+<div id = 'search_area'>
+
+<select class="btn-select" id="startBui" name="startBui">
+  <option value="00">start building</option>
+  <option value="dc">DC</option>
+</select>
+<select class="btn-select" id="startRoom" name="startRoom">
+  <option value="000">start room</option>
+  <option value="1350">1350</option>
+</select>
+<select class="btn-select" id="endBui" name="endBui">
+  <option value="00">end building</option>
+  <option value="mc">MC</option>
+</select>
+<select class="btn-select" id="endRoom" name="endRoom">
+  <option value="000">end room</option>
+  <option value="4060">4060</option>
+</select>
+<button type="button" class = "btn btn-primary" id='Search_btn' ><span>Find!<span></button>
+<button type="button" class = "btn btn-primary" id='Finish_btn' ><span>Finish<span></button>
+
+</div>
+
+
+<div id="map_all" style="height: 100%;">
+  
+  <div id="building_map"><canvas id="map" width="1076" height="1076"></canvas></div>
+</div>
+
+<div id="stairs-dialog" class = smalldialog title="stairs" style="display:none">
+  <button class = "btn btn-primary" id="goup"><span>UP</span></button>
+  <button class = "btn btn-primary" id="godown"><span>DOWN</span></button>
+</div>
+
+<div id="elevator-dialog" class = "smalldialog" title="Elevator" style="display:none">
+  <button class = "btn btn-primary" id="goup"><span>UP</span></button>
+  <button class = "btn btn-primary" id="godown"><span>DOWN</span></button>
+</div>
+
+<div id="exit-dialog" class = "smalldialog" title="Exit" style="display:none">
+  <button class = "btn btn-primary" id="goenter"><span>Enter</span></button>
+  <button class = "btn btn-primary" id="goexit"><span>Exit</span></button>
+</div>
+</body>
+</html>

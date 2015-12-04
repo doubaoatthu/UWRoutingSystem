@@ -119,7 +119,7 @@ background-color: #f90;
 	float: right;
 }
 
-#Search_btn, #Finish_btn{
+#Search_btn, #Finish_btn, #Showroute{
 position: relative; 
 display: inline-block; 
 width: 10%; 
