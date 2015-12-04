@@ -27,7 +27,6 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
     def do_POST(self):
         parseResult = urlparse(self.path)
-        
         if(parseResult.path == "/sendpath"):
             print("do post post lala")
             content_len = int(self.headers.getheader('content-length', 0))
@@ -36,7 +35,15 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             f = open("data.txt","a")
             f.write(post_body)
             f.write("\n")
-
+        elif (parseResult.path == "/getpath"):
+            print("get path")
+            content_len = int(self.headers.getheader('content-length', 0))
+            post_body = self.rfile.read(content_len)
+            print(post_body)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write("test")
 
 Handler = ServerHandler
 httpd = SocketServer.TCPServer(("", 8000), Handler)

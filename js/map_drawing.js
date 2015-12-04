@@ -81,9 +81,10 @@ $(document).ready(function() {
   map.image.onload = function() { stage.update(); };
   stage.update();
 });
+
 function findroute(event){
   var survey = [];
-  var day = new Date(); 
+  var day = new Date();
   var myid = day.getTime();
   survey.push(myid);
   for(var i = 9; i < 21; i++){
@@ -97,7 +98,7 @@ function findroute(event){
   }
   console.log("getn"+survey);
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', "/sendpath");
+  xhr.open('POST', "/getpath");
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () { // 处理函数
     if (xhr.readyState == 4 && xhr.status == 200) {
@@ -108,6 +109,7 @@ function findroute(event){
   console.log(myid);
   location.href="index.html?id="+myid;
 }
+
 function submitroute(event){
 	console.log("finish");
 	var xhr = new XMLHttpRequest();
@@ -156,7 +158,7 @@ function submitroute(event){
 
 function submittoServer(event){
   var survey = [];
-  var day = new Date(); 
+  var day = new Date();
   var myid = day.getTime();
   survey.push(myid);
   for(var i = 9; i < 21; i++){
