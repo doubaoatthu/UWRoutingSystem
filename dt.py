@@ -3,6 +3,7 @@ from sklearn.externals.six import StringIO
 from IPython.display import Image
 import os
 import pydot
+import numpy 
 # x = [[0,0],[1,1],[2,2]]
 # y = [0,1,2]
 # clf = tree.DecisionTreeClassifier()
@@ -21,16 +22,17 @@ import pydot
 # Image(graph.create_png())
 preference = []
 label = []
-with open("preference.txt") as f:
-	content = f.readlines()
-	content = str(content[0])
-	content = content[1:-2]
-	content = content.replace("\"","")
-	labelarr = content.split(",")
-	intlabelarr = map(int,labelarr)
-	preference.append(intlabelarr)
+with open("labeled_survey.txt") as f:
+	contents = f.readlines()
+	for content in contents:
+		content = content[1:-2]
+		content = content.replace("\"","")
+		labelarr = content.split(",")
+		labelarr = labelarr[1:]
+		intlabelarr = map(int,labelarr)
+		preference.append(intlabelarr)
 
-with open("feature.txt") as f:
+with open("labeled_path.txt") as f:
 	contents = f.readlines()
 	for content in contents:
 		print(content)
@@ -40,13 +42,32 @@ with open("feature.txt") as f:
 			features = fstring[1]
 			features = features[3:-4]
 			featarr = features.split(",")
-			for feat in featarr:
-				print(feat)
-				if(feat == "true"):
-					feat = "0"
-				if(feat == "false"):
-					feat = "1"
-			label.append(map(int,featarr))
+			for i in range(0,len(featarr)):
+				if(featarr[i] == "true"):
+					featarr[i] = "1"
+				if(featarr[i] == "false"):
+					featarr[i] = "0"
+			label.append(map(int,map(float,featarr)))
 
 print(preference)
 print(label)
+
+x = numpy.array(label)
+y = x.T
+print(y[1])
+for i in range(0,len(y[1])):
+	if(y[1][i] >2):
+		y[1][i] = 2
+
+fname = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
+cname = ["not using stairs","use a little","use a lot"]
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(preference,y[5])
+with open("a.dot", "w") as f:
+	f = tree.export_graphviz(clf, out_file=f)
+dot_data = StringIO()
+tree.export_graphviz(clf, out_file=dot_data,feature_names= fname, class_names=cname)
+graph = pydot.graph_from_dot_data(dot_data.getvalue())
+Image(graph.create_png())
+
+
