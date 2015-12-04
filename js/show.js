@@ -368,16 +368,10 @@ function search(event) {
   if(curBuilding.valueOf() == "00".valueOf() || curFloor.valueOf() == "0".valueOf()){
     return;
   }
-  // var firstmap = {
-  //   mapURL: "maps/"+curBuilding+curFloor+".png",
-  //   pointList:[]
-  // }
-  // //cluearea.innerHTML="Please click the BLUE SQUARE to start! You can start record your route now! You are now on Floor "+curFloor+" of "+curBuilding+" building. Please click on the map to record your route. Please make sure that you have clicked each time you turn.";
-  // data.data.paths[0].push(firstmap);
-  // data.data.id.push(document.URL.slice(-13));
-  // data.data.feature.push(0);
-  // console.log("id:"+data.data.id[0]);
-  console.log("in search");
+  var mid = document.URL.slice(-2);
+  mid = mid.replace("=","");
+  console.log("in search"+mid);
+  data = dataset[parseInt(mid)];
   console.log(data.data);
   drawAllPaths(data.data);
   console.log(document.URL);
