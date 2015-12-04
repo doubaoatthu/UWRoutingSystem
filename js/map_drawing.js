@@ -9,13 +9,15 @@ var data = {
       paths: [
       [],
       ],
-      survey: [],
       id:[],
+      feature:[],
     }
   };
 var exited = false;
 var nearlift = false;
+var nearstair = false;
 var nearexit = false;
+var nearhall = false;
 //mcx: x-1, dcx: x+3
 var stairsList = [[[253.34592847039806,126.16112970369765],[877.1896679463864,119.76165211003183],[823.8498686603353,137.1316627214105],[869.0727419680743,215.75381601501917],[921.2529804000808,310.8317688351971],[1018.6560921398262,522.9287405109786],[835.4454772007813,632.634070688107],[239.43119822186299,618.0066933311566],[138.54940391998383,303.51808015672185],[201.16569003839157,127.98955187331646],[491.0559035495386,348.31442331238264],[870.2323028221189,216.66802709982858]],
                   [[129.125841146334,318.796992481203],[252.18636761635346,149.01640682393273],[835.4454772007813,148.10219573912332],[913.1360544217687,364.7702228389519],[820.3711860982016,656.4035588931515],[251.02680676230887,644.5188147906293]],
@@ -40,8 +42,27 @@ var exitList = [[[881.8279113625648,128.90376295812587],[1022.1347747019599,526.
                 [[926.63,48.72]],
                 [[935,40]]
                 ];
+var tim_hortons = [[],[],[],[],[[970.0893719806763,312.5193098072562],[590.6304347826086,553.936543367347]],[],[]];
+var printer = [[],[],[],[],[[392.45410628019323,694.6621669501134]],[],[]];
+var bathroom = [[[970.7391304347825,545.6774376417234],[827.1425120772947,700.7794784580499],[303.43719806763283,653.6139455782313],[255.3550724637681,46.81122448979592],[793.3550724637681,109.39625850340136]],
+[[239.76086956521738,63.13775510204081],[791.4057971014493,117.55952380952381],[826.4927536231884,727.9903628117913],[293.69082125603865,670.8475056689342]],
+[[102.66183574879227,46.81122448979592],[155.94202898550725,697.1513605442177],[695.2415458937198,743.4098639455782],[660.1545893719806,118.46655328798185]],
+[[109.80917874396135,60.416666666666664],[762.8164251207729,143.86337868480726],[179.33333333333331,785.1332199546486]],[[936.3019323671497,648.562393707483],[484.07004830917873,809.9116000566894]],[[283.94444444444446,832.9614866780046],[292.39130434782606,613.3809878117913],[998.0289855072464,604.8889243197278],[994.7801932367149,828.108878968254]],[[278.7463768115942,607.3152281746031],[279.3961352657005,836.6009424603175],[996.0797101449275,841.4535501700681],[988.9323671497584,598.8231646825396]]];
 var dc1350=[780,820];
 var isfirst = true;
+
+var stair_num = 0;
+var elevator_num = 0;
+var exit_num = 0;
+var neartim = false;
+var nearprinter = false;
+var nearbathroom = false;
+var wakingdis = 0;
+var keepinside = true;
+
+
+
+
 $(document).ready(function() {
   canvas = document.getElementById("map");
   //cluearea = document.getElementById("clue");
@@ -49,21 +70,44 @@ $(document).ready(function() {
   $("#Search_btn").on("click", search);
   $("#Finish_btn").on("click", submitroute);
   $("#map").on("click", clickMap);
-  // $("#upstairs_btn").on("click", upstairs);
-  // $("#downstairs_btn").on("click", downstairs);
-  // $("#exit_btn").on("click", exitbuilding);
-  // $("#enter_btn").on("click", enterbuilding);
   $("#submit_btn").on("click", submittoServer);
   $("#goup").on("click", upstairs);
   $("#godown").on("click", downstairs);
   $("#goexit").on("click", exitbuilding);
   $("#goenter").on("click", enterbuilding);
+  $("#findroute_btn").on("click", findroute);
   var map = new createjs.Bitmap("/maps/map_colour.png");
   stage.addChild(map);
   map.image.onload = function() { stage.update(); };
   stage.update();
 });
-
+function findroute(event){
+  var survey = [];
+  var day = new Date(); 
+  var myid = day.getTime();
+  survey.push(myid);
+  for(var i = 9; i < 21; i++){
+    var results = document.getElementsByName("qu"+i);
+    var getN;
+    for(var j = 0; j < results.length; j++){
+      if(results[j].checked)
+        getN = results[j].value;
+    }
+    survey.push(getN);
+  }
+  console.log("getn"+survey);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', "/sendpath");
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onreadystatechange = function () { // 处理函数
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        alert(xhr.responseText);
+    }
+  }
+  xhr.send(JSON.stringify(survey));
+  console.log(myid);
+  location.href="index.html?id="+myid;
+}
 function submitroute(event){
 	console.log("finish");
 	var xhr = new XMLHttpRequest();
@@ -74,6 +118,32 @@ function submitroute(event){
         alert(xhr.responseText);
     }
   }
+  $.each(data.data.paths, function (i, mypath){
+    var lastx = 0;
+    var lasty = 0;
+    console.log(mypath);
+    $.each(mypath, function(k, path){
+      $.each(path.pointList, function(j, point){
+        if(j == 0){
+          lastx = point.x;
+          lasty = point.y;
+        }else{
+          wakingdis += Math.sqrt((point.x - lastx)*(point.x - lastx) + (point.y - lasty)*(point.y - lasty));
+          lastx = point.x;
+          lasty = point.y;
+        }
+    });
+    });
+  });
+
+  data.data.feature.push(stair_num);
+  data.data.feature.push(elevator_num);
+  data.data.feature.push(exit_num);
+  data.data.feature.push(neartim);
+  data.data.feature.push(nearprinter);
+  data.data.feature.push(nearbathroom);
+  data.data.feature.push(wakingdis);
+  data.data.feature.push(keepinside);
   xhr.send(JSON.stringify(data));
   var map = new createjs.Bitmap("/maps/thankyou.png");
   map.y = 100;
@@ -111,14 +181,36 @@ function submittoServer(event){
   console.log(myid);
   location.href="index.html?id="+myid;
 }
+function nearFacility(x, y, floor){
+  $.each(tim_hortons[floor], function (i, pos){
+    var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
+    if(distance <= 400){
+        neartim = true;
+    }
+  });
+
+  $.each(bathroom[floor], function (i, pos){
+    var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
+    if(distance <= 400){
+        nearbathroom = true;
+    }
+  });
+
+  $.each(printer[floor], function (i, pos){
+    var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
+    if(distance <= 400){
+        nearprinter = true;
+    }
+  });
+}
 
 function canGoup(x, y, floor){
-  console.log("can go up x:"+x+" y:"+y);
   nearlift = false;
+  nearstair = false;
   $.each(stairsList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
     if(distance <= 400){
-        nearlift = true;
+        nearstair = true;
         //cluearea.innerHTML="You are close to the STAIRS, you can now click Up/Dn on the left side to go upstairs or downstairs.";
         return true;
     }
@@ -136,10 +228,12 @@ function canGoup(x, y, floor){
 
 function canExit(x, y, floor){
   nearexit = false;
+  nearhall = false;
   $.each(exitList[floor], function (i, pos){
     var distance = (pos[0]-x)*(pos[0]-x) + (pos[1]-y)*(pos[1]-y);
     if(distance <= 400){
-        nearexit = true;
+        if(floor > 2 || (floor == 2 && curBuilding.valueOf() == "dc".valueOf())) nearhall=true;
+        else nearexit = true;
         //cluearea.innerHTML="You are close to an EXIT of building "+curBuilding+" , you can now click Ex on the right side to exit the building.";
 
     }
@@ -147,7 +241,7 @@ function canExit(x, y, floor){
 }
 
 function downstairs(event){
-  if(!nearlift && !exited) return;
+  if(!(nearlift||nearstair) && !exited) return;
   curFloor -= 1;
   if(curFloor <= 0){
     curFloor += 1;
@@ -161,10 +255,14 @@ function downstairs(event){
   $("#stairs-dialog").dialog('close');
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
+  if(nearlift)
+    elevator_num += 1;
+  else if(nearstair)
+    stair_num += 1;
 }
 
 function upstairs(event){
-  if(!nearlift && !exited) return;
+  if(!(nearlift||nearstair) && !exited) return;
   curFloor += 1;
   if(curBuilding.valueOf() == "mc".valueOf()){
     if(curFloor > 4){
@@ -185,10 +283,14 @@ function upstairs(event){
   $("#stairs-dialog").dialog('close');
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
+  if(nearlift)
+    elevator_num += 1;
+  else if(nearstair)
+    stair_num += 1;
 }
 
 function exitbuilding(event){
-  if(!nearexit) return;
+  if(!(nearexit||nearhall)) return;
   exited = true;
   var lastbuilding = curBuilding;
   var lastfloor = curFloor;
@@ -217,6 +319,7 @@ function exitbuilding(event){
   //cluearea.innerHTML="You have now exited Floor "+lastfloor+" of "+lastbuilding+" building. Now you are presented the Entrance on Floor "+ curFloor + " of "+curBuilding+" building! If this is not the Entrance you expected, please keep the Up/Dn buttons to adjust the floor levels. If you want to enter this entrance, please click on the En button on the right."
   data.data.paths[0].push(firstmap);
   drawAllPaths(data.data);
+  if(nearexit) {exit_num += 1; keepinside=false;}
 }
 
 function enterbuilding(event){
@@ -228,6 +331,7 @@ function enterbuilding(event){
 
 function clickMap(event) {
     console.log("click map");
+    console.log(data);
     event.preventDefault = true;
     var xx = event.clientX;
     var yy = event.clientY;
@@ -236,14 +340,13 @@ function clickMap(event) {
     pt.y = stage.mouseY;
     var myindex = (curBuilding.valueOf() == "mc".valueOf())? -1:3;
     myindex += curFloor;
-    canGoup(pt.x, pt.y, myindex)
-    canExit(pt.x, pt.y, myindex)
-    if(nearlift){
-      console.log("click map can go up");
+    canGoup(pt.x, pt.y, myindex);
+    canExit(pt.x, pt.y, myindex);
+    nearFacility(pt.x, pt.y, myindex);
+    if(nearlift||nearstair){
       $("#stairs-dialog").dialog({position: {of:event}});
     }
-    if(nearexit){
-      console.log("click map can go up");
+    if(nearexit || nearhall){
       $("#exit-dialog").dialog({position: {of:event}});
       $("#exit-dialog").dialog("option", "position", {of: event});
     }
@@ -264,7 +367,6 @@ function newpoint(event) {
     data.data.paths[0][arrlen-1].pointList.push(pt);
     var myindex = (curBuilding.valueOf() == "mc".valueOf())? -1:3;
     myindex += curFloor;
-    //cluearea.innerHTML="Recording......  You are now on Floor "+curFloor+" of "+curBuilding+" building.";
     canGoup(pt.x, pt.y, myindex);
     canExit(pt.x, pt.y, myindex);
     console.log(data.data);
@@ -288,6 +390,7 @@ function search(event) {
   //cluearea.innerHTML="Please click the BLUE SQUARE to start! You can start record your route now! You are now on Floor "+curFloor+" of "+curBuilding+" building. Please click on the map to record your route. Please make sure that you have clicked each time you turn.";
   data.data.paths[0].push(firstmap);
   data.data.id.push(document.URL.slice(-13));
+  data.data.feature.push(0);
   console.log("id:"+data.data.id[0]);
   console.log("in search");
   console.log(data.data);
