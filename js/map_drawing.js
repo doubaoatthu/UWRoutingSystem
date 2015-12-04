@@ -172,7 +172,7 @@ function submittoServer(event){
   }
   console.log("getn"+survey);
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', "/sendpath");
+  xhr.open('POST', "/sendsurvey");
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onreadystatechange = function () { // 处理函数
     if (xhr.readyState == 4 && xhr.status == 200) {
