@@ -89,7 +89,7 @@ function submittoServer(event){
   var day = new Date(); 
   var myid = day.getTime();
   survey.push(myid);
-  for(var i = 9; i < 20; i++){
+  for(var i = 9; i < 21; i++){
     var results = document.getElementsByName("q"+i);
     var getN;
     for(var j = 0; j < results.length; j++){
