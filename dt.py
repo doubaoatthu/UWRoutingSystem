@@ -44,18 +44,17 @@ print(len(y))
 print(len(preference))
 
 fname = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
-cname = ["not using stairs","use a little","use a lot"]
 
 def drawDecisionTree(classIndex):
 	clf = tree.DecisionTreeClassifier()
 	clf = clf.fit(preference,y[classIndex])
 	dot_data = StringIO()
 	# change it: class_names = cnames[classIndex]
-	tree.export_graphviz(clf,out_file=dot_data,feature_names= fname,class_names=cname,filled=True, rounded=True,special_characters=True)
+	tree.export_graphviz(clf,out_file=dot_data,feature_names= fname,filled=True, rounded=True,special_characters=True)
 	graph = pydot.graph_from_dot_data(dot_data.getvalue())
 	filename = "decisionTree_" + str(classIndex) + ".pdf"
 	graph.write_pdf(filename) 
-
-drawDecisionTree(4)
+for i in range(6,9):
+	drawDecisionTree(i)
 
 
