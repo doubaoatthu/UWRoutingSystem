@@ -11,8 +11,12 @@ from urlparse import urlparse, parse_qs
 import math
 
 fname = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
+numPhysicalProperties = 9
+featureNames = map(str, range(numPhysicalProperties))
+pref_distanceIndex = 7
+
 preference = []
-label = []
+labels = []
 with open("./data/survey.txt") as f:
     contents = f.readlines()
     for content in contents:
@@ -36,52 +40,61 @@ with open("./data/path.txt") as f:
                     featarr[i] = "1"
                 if(featarr[i] == "false"):
                     featarr[i] = "0"
-            label.append(map(int,map(float,featarr)))
+            labels.append(map(int,map(float,featarr)))
 
-for i in range(0,len(label)):
-    if(label[i][7] < 1500):
-        label[i][7] = 1
-    elif(label[i][7] < 2500):
-        label[i][7] = 2
+def normalizeLabel(label):
+    if(label[7] < 1500):
+        label[7] = 1
+    elif(label[7] < 2500):
+        label[7] = 2
     else:
-        label[i][7] = 3
+        label[7] = 3
+	
+for i in range(0,len(labels)):
+    normalizeLabel(labels[i])
+    print labels[i]
+    print "*********"
 
-x = numpy.array(label)
+classNames = map(str, range(len(labels)))
+x = numpy.array(labels)
 y = x.T
 
-def drawDecisionTree(classIndex):
+physicalPropertyDecisionTrees = []
+
+def decisionTreeFromPreferenceToPhysicalProperty(physicalIndex):
     clf = tree.DecisionTreeClassifier()
-    clf = clf.fit(preference,y[classIndex])
+    clf = clf.fit(preference,y[physicalIndex])
     return clf
+
+for i in range(numPhysicalProperties):
+    physicalPropertyDecisionTrees.append(decisionTreeFromPreferenceToPhysicalProperty(i))
+
+routeDecisionTree = tree.DecisionTreeClassifier()
+routeDecisionTree = routeDecisionTree.fit(labels, range(len(labels)))
+
+def drawDecisionTree(dt, filename, featureNames, classNames):
+    dot_data = StringIO()
+    tree.export_graphviz(dt, out_file=dot_data, feature_names=featureNames, class_names=classNames, filled=True, rounded=True, special_characters=True)
+    graph = pydot.graph_from_dot_data(dot_data.getvalue())
+    graph.write_pdf(filename) 
+
+drawDecisionTree(routeDecisionTree, "routeDT.pdf", featureNames, classNames)
 
 def handlework(content):
     print(content)
     content = content[1:-2]
     content = content.replace("\"","")
-    labelarr = content.split(",")
-    labelarr = labelarr[1:]
+    labelarr = content.split(",")[1:]
+    print labelarr
     intlabelarr = map(int,labelarr)
+    normalizeLabel(intlabelarr)
     trees = []
-    result = []
-    for i in range (1,9):
-        result.append(drawDecisionTree(i).predict(intlabelarr)[0])
-    for res in result:
-        print(res)
-    ix = 0
-    choice = 0
-    max = 1000
-    for l in label:
-        dis = 0
-        for i in range(0,len(l)-1):
-            if(l[i] - result[i] == 0):
-                dis = dis - 2
-            dis = dis + math.sqrt((l[i] - result[i])*(l[i] - result[i]))
-        if(dis < max):
-            max = dis
-            choice = ix
-        ix += 1
-    return choice
-
+    physicalProperties = []
+    for i in range(numPhysicalProperties):
+        physicalProperties.append(physicalPropertyDecisionTrees[i].predict(intlabelarr)[0])
+    print physicalProperties
+    return routeDecisionTree.predict(physicalProperties)[0]
+   
 def search(origin, destination):
     return 0
 
