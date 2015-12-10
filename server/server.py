@@ -11,8 +11,9 @@ from urlparse import urlparse, parse_qs
 import math
 
 preferenceName = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
-propertyName = ["num of stairs", "levels of elevators", "num of exits", "is near coffee shop", "is near a printer", "is near a bathroom", "distance", "does keep inside"]
+propertyName = ["empty", "num of stairs", "levels of elevators", "num of exits", "is near coffee shop", "is near a printer", "is near a bathroom", "distance", "does keep inside"]
 propertyValues = [
+    ["empty"],
     ["0 stair", "1 stairs", "2 stairs", "3 stairs", "4 stairs"],
     ["0 level of elevator", "1 levels of elevator", "2 levels of elevator"],
     ["0 exit", "1 exit"],
@@ -86,6 +87,8 @@ def drawDecisionTree(dt, filename, featureNames, classNames):
 
 for i in range(numPhysicalProperties):
     physicalPropertyDecisionTrees.append(decisionTreeFromPreferenceToPhysicalProperty(i))
+    if i == 0 or i == 5:
+        continue
     drawDecisionTree(physicalPropertyDecisionTrees[i], "decision_tree_" + str(i) + ".png", preferenceName, propertyValues[i])
 
 routeDecisionTree = tree.DecisionTreeClassifier()
