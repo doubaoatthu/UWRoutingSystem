@@ -74,6 +74,8 @@ routeDecisionTree = routeDecisionTree.fit(labels, range(len(labels)))
 
 def drawDecisionTree(dt, filename, featureNames, classNames):
     dot_data = StringIO()
+    print featureNames
+    print classNames
     tree.export_graphviz(dt, out_file=dot_data, feature_names=featureNames, class_names=classNames, filled=True, rounded=True, special_characters=True)
     graph = pydot.graph_from_dot_data(dot_data.getvalue())
     graph.write_pdf(filename) 
@@ -93,7 +95,9 @@ def handlework(content):
     for i in range(numPhysicalProperties):
         physicalProperties.append(physicalPropertyDecisionTrees[i].predict(intlabelarr)[0])
     print physicalProperties
-    return routeDecisionTree.predict(physicalProperties)[0]
+    index = routeDecisionTree.predict(physicalProperties)[0]
+    print labels[i]
+    return index
    
 def search(origin, destination):
     return 0
