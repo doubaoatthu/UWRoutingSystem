@@ -10,9 +10,19 @@ import numpy
 from urlparse import urlparse, parse_qs
 import math
 
-fname = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
+preferenceName = ["sunny","cloudy","rainy/snowy","tired","coffee","bathroom","avoid crowd","curiousity","printer","campus event","hurry","fresh air","meet friend"]
+propertyName = ["num of stairs", "levels of elevators", "num of exits", "is near coffee shop", "is near a printer", "is near a bathroom", "distance", "does keep inside"]
+propertyValues = [
+    ["0 stair", "1 stairs", "2 stairs", "3 stairs", "4 stairs"],
+    ["0 level of elevator", "1 levels of elevator", "2 levels of elevator"],
+    ["0 exit", "1 exit"],
+    ["not near coffee shop", "near coffee shop"],
+    ["not near printer", "near printer"],
+    ["not near bathroom", "near bathroom"],
+    ["close", "normal", "far"],
+    ["keep inside", "go outside"]
+    ]
 numPhysicalProperties = 9
-featureNames = map(str, range(numPhysicalProperties))
 pref_distanceIndex = 7
 
 preference = []
@@ -66,19 +76,19 @@ def decisionTreeFromPreferenceToPhysicalProperty(physicalIndex):
     clf = clf.fit(preference,y[physicalIndex])
     return clf
 
-for i in range(numPhysicalProperties):
-    physicalPropertyDecisionTrees.append(decisionTreeFromPreferenceToPhysicalProperty(i))
-
-routeDecisionTree = tree.DecisionTreeClassifier()
-routeDecisionTree = routeDecisionTree.fit(labels, range(len(labels)))
-
 def drawDecisionTree(dt, filename, featureNames, classNames):
     dot_data = StringIO()
     tree.export_graphviz(dt, out_file=dot_data, feature_names=featureNames, class_names=classNames, filled=True, rounded=True, special_characters=True)
     graph = pydot.graph_from_dot_data(dot_data.getvalue())
-    graph.write_pdf(filename) 
+    graph.write_png(filename) 
 
-drawDecisionTree(routeDecisionTree, "routeDT.pdf", featureNames, classNames)
+for i in range(numPhysicalProperties):
+    physicalPropertyDecisionTrees.append(decisionTreeFromPreferenceToPhysicalProperty(i))
+    drawDecisionTree(physicalPropertyDecisionTrees[i], "decision_tree_" + str(i) + ".png", preferenceName, propertyValues[i])
+
+routeDecisionTree = tree.DecisionTreeClassifier()
+routeDecisionTree = routeDecisionTree.fit(labels, range(len(labels)))
+drawDecisionTree(routeDecisionTree, "routeDT.png", propertyName, classNames)
 
 def handlework(content):
     print(content)
