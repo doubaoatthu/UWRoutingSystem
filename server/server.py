@@ -81,7 +81,7 @@ def drawDecisionTree(dt, filename, featureNames, classNames):
     dot_data = StringIO()
     print featureNames
     print classNames
-    tree.export_graphviz(dt, out_file=dot_data, feature_names=featureNames, class_names=classNames, rounded=True, special_characters=True, label=None, impurity=False)
+    tree.export_graphviz(dt, out_file=dot_data, feature_names=featureNames, class_names=classNames, rounded=True, special_characters=True, filled=True)
     graph = pydot.graph_from_dot_data(dot_data.getvalue())
     graph.write_png(filename) 
 
